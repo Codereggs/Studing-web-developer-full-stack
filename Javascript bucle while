@@ -1,0 +1,46 @@
+
+<html>
+  <head>
+  <meta charset="utf-8">
+  <title>Bucle While</title>
+
+  </head>
+  <body>
+    <h1 id="enunciado" style="color:white;border:1px solid gray;text-align:center;border-radius:10px;background-color:black">Te adivino cuantos dedos tienes levantados...</h1>
+    <input id="entradaUsuario" type="number" placeholder="¿Cuantos dedos?" maxlength="1" max="5" min="0" style="border-radius:10px;text-align:center;float:center;width:150px">
+    <button id="botonIngresar" style="border-radius:10px;float:center;text-align:center;">Ingresar</button>
+    <script type="text/javascript">
+    document.getElementById("botonIngresar").onclick = function(){
+
+  var numero = document.getElementById("entradaUsuario").value;
+  var adivinanza = false;
+  var dedos = 0;
+
+  //Bucle para determinar la condicion
+    while (dedos<numero)
+    {
+      dedos++;
+      adivinanza = true;
+          // Si el número coincide con los dedos entonces cambie a true para que aparezcan cuantos dedos son.
+          if(adivinanza == true){
+            alert("Tienes levantados " + numero + " dedos");
+            break;
+          } 
+        
+    } 
+    
+    //Por si no ponen nada o ponen 0.
+     if (adivinanza == false) {
+                alert ("No levantastes ningun dedo, escribe un número mayor a 0.")
+      
+    }
+
+}
+    </script>
+
+
+  </body>
+
+
+
+</html>
