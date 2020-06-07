@@ -1,0 +1,199 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    meta name="viewport" content="width=device-width, initial-scale=1.0"&amp;gt;
+    <title>Comprueba tus reflejos</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tenali+Ramakrishna&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fjalla+One&display=swap" rel="stylesheet">
+
+  </head>
+  <body>
+    <div id="contenedor">
+      <h1 id="encabezado">¡Comprueba tus reflejos!<h1>
+      <h2 id="encabezado2">¡Haz click en los circulos y rectangulos tan rapido como puedas!<h2>
+        <div id="cajaTR"><p id="tiempoP">Tiempo de reacción: <span id="tiempoR"></span> </p></div>
+        <div id="cajaP"><p id="score">Puntuación más rápida: <span id="puntuacion"></span></p></div>
+      
+      
+    </div>
+<div id="forma"></div>
+
+<style type="text/css">
+
+#tiempoP{
+  font-size:18px;
+  color:white;
+  border:3px solid gray;
+  max-width:300px;
+  width:100%;
+  padding:5px;
+  text-align:center;
+  border-radius: 20px;
+  font-family: 'Fjalla One', sans-serif;
+}
+
+#score{
+  font-size:18px;
+  color:white;
+  border:3px solid gray;
+  max-width:300px;
+  width:100%;
+  padding:5px;
+  text-align:center;
+  border-radius: 20px;
+  font-family: 'Fjalla One', sans-serif;
+}
+
+#cajaTR{
+  float:left;
+  right:2%;
+}
+
+#cajaP{
+  float:right;
+  position:relative;
+  right:3%;
+  left:2%
+}
+
+#forma{
+  width:100px;
+  height:100px;
+  background-color: rgb(0, 0, 255);
+  border: 3px solid gray;
+  position: relative;
+  top:100px;
+  left:5%;
+  background-image:url(https://w7.pngwing.com/pngs/790/601/png-transparent-rage-comic-trollface-internet-troll-troll-meme-comics-face-head.png);
+  background-size:100px;
+}
+
+#encabezado{
+  color: black;
+  text-align:center;
+  font-family: 'Tenali Ramakrishna', sans-serif;
+  font-size: 50px;
+  text-shadow: 2px 2px 30px white;
+}
+#encabezado2{
+  color: black;
+  text-align:center;
+  font-family: 'Tenali Ramakrishna', sans-serif;
+  font-size: 35px;
+  text-shadow: 2px 2px 30px white;
+}
+
+#contenedor{
+  display:inline-block;
+  border: 2px gray solid;
+  padding: 0px 10%;
+  background-color: rgb(208,208,208);
+  background: linear-gradient(166deg, rgba(208,208,208,1) 0%, rgba(99,99,99,1) 46%, rgba(0,0,0,1) 100%);
+  max-width:1000px;
+  width:50%;
+  position:relative;
+  left:5%;
+  right:5%;
+}
+
+body{
+  background-color: black;
+
+}
+#puntuacion{
+  color:yellow;
+}
+</style>
+
+
+    
+    
+    <!-- Aca comienza el script -->
+    <script type="text/javascript">
+let forma = document.getElementById("forma")
+let tiempoReaccion = document.getElementById("tiempoR")
+var inicio = new Date().getTime(); // Alcance Global - Inicio del tiempo
+let puntuacionRapida = document.getElementById("puntuacion");
+let firstScore = 0;
+let lastScore = 0;
+let primeraPuntuacion = true;
+
+function obtenerColorAleatorio(){
+  var letters = '0123456789ABCDEF'.split(''); //Crea un array con los numeros y letras.
+  color = "#"; //Define la almohadilla como color
+  for (var i = 0; i < 6; i++){ //Se aplica el for para que ocurra el cambio
+    color += letters[Math.round(Math.random()*15)]; //Se establece la aleatoriedad.
+  }
+  return color; //Devuelve el color nuevo.
+}
+
+
+function aparecerForma(){ //Define los parámetros para que aparezca la figura.
+
+  forma.style.display = "block"; //Define que aparezca un bloque.
+  inicio = new Date().getTime(); //Define un nuevo tiempo de inicio.  
+  var top = ((Math.random()*300)+200); //Define el atributo css top aleatorio.
+  var left = ((Math.random()*400)+200); //Define el atributo css left aleatorio.
+  var width = ((Math.random()*200)+50); //Define el ancho aleatorio.
+  var height = ((Math.random()*200)+50); // Define la altura aleatoria.
+  var colorAleatorio = obtenerColorAleatorio(); //Activa funcion color aleatorio.
+  forma.style.backgroundImage = "none";
+
+if(Math.random()>0.5){
+   forma.style.borderRadius = "50%"; //Aplica el borde circular.
+} else {
+  forma.style.borderRadius = "0%"; //Aplica cuadrado.
+}
+
+  forma.style.top = top+"px"; //Aplica el atributo css aleatorio.
+  forma.style.left = left+"px"; //Aplica el atributo css aleatorio.
+  forma.style.width = width+"px"; //Aplica el ancho.
+  forma.style.height = height+"px"; //Aplica la altura.
+  forma.style.backgroundColor = colorAleatorio; //Aplica color aleatorio
+}
+
+function aparecerFormaDespuesRetraso(){ //Define que aparezca despues del retraso aleatoriamente.
+  setTimeout(aparecerForma, Math.random()*2000);
+}
+
+
+forma.onclick = function (){ //Al hacer click
+forma.style.display = "none"; //Desaparece la forma
+var fin = new Date().getTime(); //Se establece un tiempo final.
+var diferencia = (fin-inicio)/1000; //Se realiza la diferencia en milisegundos y se divide para ser por segundos.
+tiempoReaccion.innerHTML = diferencia + ' Segundos'; //Se muestra cuantos segundos fueron.
+
+
+
+myScore();
+aparecerFormaDespuesRetraso(); //Se llama de nuevo la forma desaparecida.
+}
+
+
+function myScore(){ //Definir la puntuacion mas rápida.
+
+    if(primeraPuntuacion){ //El switch para apagarlo
+      firstScore = tiempoReaccion.textContent; // Primera puntuacion ancla a guardar
+      lastScore = firstScore; //Segunda puntuacion la que fluctua
+      primeraPuntuacion = false; //Apagado el switch
+      puntuacionRapida.innerHTML = firstScore; //Se cambia el dato en html.
+  }
+
+  lastScore = tiempoReaccion.textContent; //Dato a guardar para que fluctue.
+
+    if(firstScore>lastScore){ //Condicion para que se guarde
+      firstScore = lastScore //Se igualan los datos, el estatico con el que fluctua.
+      puntuacionRapida.innerHTML = lastScore; //Se reemplaza el dato en html.
+  } 
+}
+
+
+    </script>
+    <!-- Aca termina el script -->
+
+
+  </body>
+
+
+
+</html>
